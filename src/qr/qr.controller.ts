@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import QRCode = require('qrcode');
 import { v4 as uuidv4 } from 'uuid';
@@ -21,8 +21,10 @@ export class QrController {
       const qr = await QRCode.toDataURL(strJson, config);
       console.log(qr);
       return {
-        status: 200,
+        status: 201,
         msj: 'QR GENERADO',
+        id: data.id,
+        base64: qr,
       };
     } catch (error) {}
   }
